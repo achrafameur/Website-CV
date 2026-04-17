@@ -3,688 +3,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Achraf Ameur — Ingénieur Full-Stack</title>
+<title>Achraf Ameur — Full-Stack Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050810;
-    --bg2: #0c1120;
-    --bg3: #111827;
-    --accent: #4f8ef7;
-    --accent2: #7c3aed;
-    --gold: #f59e0b;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --border: rgba(255,255,255,0.07);
-    --card: rgba(255,255,255,0.04);
+    --bg: #050810; --bg2: #0c1120; --bg3: #111827;
+    --accent: #4f8ef7; --accent2: #7c3aed;
+    --text: #f1f5f9; --muted: #94a3b8;
+    --border: rgba(255,255,255,0.07); --card: rgba(255,255,255,0.04);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
 
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 999;
-  }
-
-  /* ── NAVIGATION ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 6vw;
-    background: rgba(5,8,16,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.1rem;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    text-decoration: none;
-  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 6vw; background: rgba(5,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); gap: 1rem; }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
   .nav-logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.875rem; font-weight: 500;
-    letter-spacing: 0.04em;
-    transition: color 0.2s;
-  }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
-  .nav-cta {
-    background: var(--accent);
-    color: #fff !important;
-    padding: 0.5rem 1.2rem;
-    border-radius: 6px;
-    font-size: 0.8rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase;
-    transition: opacity 0.2s !important;
-  }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .nav-cta { background: var(--accent); color: #fff !important; padding: 0.5rem 1.2rem; border-radius: 6px; font-size: 0.8rem !important; font-weight: 600 !important; letter-spacing: 0.05em !important; text-transform: uppercase; transition: opacity 0.2s !important; }
   .nav-cta:hover { opacity: 0.85; }
+  .lang-toggle { display: flex; background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .lang-btn { padding: 0.38rem 0.7rem; cursor: pointer; border: none; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; transition: background 0.2s, color 0.2s; }
+  .lang-btn.active { background: var(--accent); color: #fff; }
+  .lang-btn:hover:not(.active) { color: var(--text); }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: center;
-    padding: 8rem 6vw 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-glow {
-    position: absolute;
-    width: 700px; height: 700px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
-    top: -100px; right: -100px;
-    pointer-events: none;
-  }
-  .hero-glow2 {
-    position: absolute;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
-    bottom: 0; left: -100px;
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: rgba(79,142,247,0.1);
-    border: 1px solid rgba(79,142,247,0.25);
-    border-radius: 100px;
-    padding: 0.35rem 1rem;
-    font-size: 0.78rem; font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.06em; text-transform: uppercase;
-    margin-bottom: 1.8rem;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 2s infinite;
-  }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 6vw 4rem; position: relative; overflow: hidden; }
+  .hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
+  .hero-glow2 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%); bottom: 0; left: -100px; pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.25); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.78rem; font-weight: 500; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.8rem; animation: fadeUp 0.6s ease both; }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; flex-shrink: 0; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
-
-  .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(3rem, 7vw, 6rem);
-    line-height: 1.0;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.7s 0.1s ease both;
-  }
+  .hero-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 7vw, 6rem); line-height: 1.0; letter-spacing: -0.04em; margin-bottom: 1.5rem; animation: fadeUp 0.7s 0.1s ease both; }
   .hero-title .line2 { color: var(--accent); }
-  .hero-sub {
-    font-size: 1.15rem; color: var(--muted);
-    max-width: 520px; line-height: 1.7;
-    margin-bottom: 2.5rem;
-    animation: fadeUp 0.7s 0.2s ease both;
-  }
-  .hero-actions {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.3s ease both;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--accent);
-    color: #fff; text-decoration: none;
-    padding: 0.8rem 1.8rem;
-    border-radius: 8px;
-    font-weight: 600; font-size: 0.9rem;
-    letter-spacing: 0.02em;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; text-decoration: none; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: transform 0.2s, box-shadow 0.2s; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,142,247,0.35); }
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: transparent;
-    color: var(--text); text-decoration: none;
-    padding: 0.8rem 1.8rem;
-    border-radius: 8px;
-    font-weight: 500; font-size: 0.9rem;
-    border: 1px solid var(--border);
-    transition: background 0.2s, border-color 0.2s;
-  }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--text); text-decoration: none; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 500; font-size: 0.9rem; border: 1px solid var(--border); transition: background 0.2s, border-color 0.2s; }
   .btn-secondary:hover { background: var(--card); border-color: rgba(255,255,255,0.15); }
-
-  .hero-stats {
-    display: flex; gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--border);
-    animation: fadeUp 0.7s 0.4s ease both;
-  }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem; font-weight: 700;
-    color: var(--text);
-  }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); animation: fadeUp 0.7s 0.4s ease both; flex-wrap: wrap; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; }
   .stat-label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
 
-  @keyframes fadeUp {
-    from { opacity:0; transform: translateY(24px); }
-    to { opacity:1; transform: translateY(0); }
-  }
-
-  /* ── SECTIONS ── */
   section { padding: 6rem 6vw; }
-  .section-tag {
-    display: inline-block;
-    font-size: 0.7rem; font-weight: 600;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 0.75rem;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700; letter-spacing: -0.03em;
-    margin-bottom: 0.5rem;
-  }
+  .section-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
   .section-desc { color: var(--muted); font-size: 1rem; max-width: 480px; line-height: 1.7; }
 
-  /* ── ABOUT ── */
   #about { background: var(--bg2); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem; align-items: center;
-    margin-top: 3rem;
-  }
-  .about-photo {
-    position: relative;
-  }
-  .about-photo-frame {
-    width: 100%; aspect-ratio: 4/5;
-    border-radius: 16px;
-    background: linear-gradient(135deg, var(--bg3), var(--bg));
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-  .about-photo-frame::before {
-    content: '';
-    position: absolute; inset: -1px;
-    background: linear-gradient(135deg, rgba(79,142,247,0.3), rgba(124,58,237,0.3), transparent);
-    border-radius: 16px;
-    z-index: 0;
-    mask: linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff);
-    mask-composite: exclude;
-    padding: 1px;
-  }
-  .avatar-big {
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 3rem; font-weight: 800;
-    color: #fff; z-index: 1;
-  }
-  .about-text h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem; font-weight: 700;
-    margin-bottom: 1rem;
-  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+  .about-photo-frame { width: 100%; aspect-ratio: 4/5; border-radius: 16px; background: linear-gradient(135deg, var(--bg3), var(--bg)); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; position: relative; }
+  .avatar-big { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: #fff; }
+  .about-text h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
   .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
   .lang-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .pill {
-    padding: 0.3rem 0.9rem;
-    border-radius: 100px;
-    font-size: 0.78rem; font-weight: 500;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: var(--card);
-  }
+  .pill { padding: 0.3rem 0.9rem; border-radius: 100px; font-size: 0.78rem; font-weight: 500; border: 1px solid var(--border); color: var(--muted); background: var(--card); }
   .pill.active { border-color: rgba(79,142,247,0.4); color: var(--accent); background: rgba(79,142,247,0.08); }
 
-  /* ── EXPERIENCE ── */
   #experience { background: var(--bg); }
   .timeline { margin-top: 3rem; position: relative; }
-  .timeline::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
-  }
-  .exp-item {
-    padding-left: 2rem;
-    margin-bottom: 2.5rem;
-    position: relative;
-    opacity: 0;
-    transform: translateX(-16px);
-    transition: opacity 0.5s, transform 0.5s;
-  }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent); }
+  .exp-item { padding-left: 2rem; margin-bottom: 2.5rem; position: relative; opacity: 0; transform: translateX(-16px); transition: opacity 0.5s, transform 0.5s; }
   .exp-item.visible { opacity: 1; transform: translateX(0); }
-  .exp-item::before {
-    content: '';
-    position: absolute; left: -4px; top: 6px;
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(79,142,247,0.2);
-  }
+  .exp-item::before { content: ''; position: absolute; left: -4px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(79,142,247,0.2); }
   .exp-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
-  .exp-company {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem; font-weight: 700;
-  }
-  .exp-date {
-    font-size: 0.78rem; font-weight: 500;
-    color: var(--accent);
-    background: rgba(79,142,247,0.1);
-    border: 1px solid rgba(79,142,247,0.2);
-    padding: 0.25rem 0.75rem; border-radius: 100px;
-  }
+  .exp-company { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
+  .exp-date { font-size: 0.78rem; font-weight: 500; color: var(--accent); background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2); padding: 0.25rem 0.75rem; border-radius: 100px; }
   .exp-role { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; font-style: italic; }
   .exp-tasks { list-style: none; }
-  .exp-tasks li {
-    font-size: 0.875rem; color: #c8d5e8;
-    padding: 0.25rem 0;
-    padding-left: 1.2rem;
-    position: relative;
-  }
-  .exp-tasks li::before {
-    content: '→';
-    position: absolute; left: 0;
-    color: var(--accent); font-size: 0.8rem;
-  }
+  .exp-tasks li { font-size: 0.875rem; color: #c8d5e8; padding: 0.25rem 0 0.25rem 1.2rem; position: relative; }
+  .exp-tasks li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
 
-  /* ── SKILLS ── */
   #skills { background: var(--bg2); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem; margin-top: 3rem;
-  }
-  .skill-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.3s, transform 0.3s;
-  }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.3s, transform 0.3s; }
   .skill-card:hover { border-color: rgba(79,142,247,0.3); transform: translateY(-3px); }
-  .skill-card-icon {
-    font-size: 1.5rem; margin-bottom: 0.75rem;
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    background: rgba(79,142,247,0.1);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .skill-card h4 {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.9rem; font-weight: 700;
-    letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 0.75rem;
-  }
+  .skill-card-icon { font-size: 1.2rem; margin-bottom: 0.75rem; width: 44px; height: 44px; border-radius: 10px; background: rgba(79,142,247,0.1); display: flex; align-items: center; justify-content: center; }
+  .skill-card h4 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
   .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .skill-tag {
-    font-size: 0.78rem; font-weight: 500;
-    padding: 0.25rem 0.7rem;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.06);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .skill-tag { font-size: 0.78rem; font-weight: 500; padding: 0.25rem 0.7rem; border-radius: 6px; background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid var(--border); }
 
-  /* ── EDUCATION ── */
   #education { background: var(--bg); }
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
-  .edu-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.75rem;
-    position: relative; overflow: hidden;
-    transition: border-color 0.3s;
-  }
+  .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
   .edu-card:hover { border-color: rgba(79,142,247,0.3); }
-  .edu-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-  .edu-degree {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;
-  }
+  .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
   .edu-school { color: var(--muted); font-size: 0.875rem; margin-bottom: 0.4rem; }
-  .edu-year {
-    font-size: 0.78rem; color: var(--accent);
-    font-weight: 600; letter-spacing: 0.04em;
-  }
+  .edu-year { font-size: 0.78rem; color: var(--accent); font-weight: 600; letter-spacing: 0.04em; }
 
-  /* ── CONTACT ── */
-  #contact {
-    background: var(--bg2);
-    text-align: center;
-  }
+  #contact { background: var(--bg2); text-align: center; }
   .contact-inner { max-width: 560px; margin: 0 auto; padding-top: 2rem; }
   .contact-inner .section-title { margin-bottom: 1rem; }
   .contact-inner .section-desc { margin: 0 auto 2.5rem; }
   .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .contact-link {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    color: var(--text); text-decoration: none;
-    padding: 0.75rem 1.5rem; border-radius: 10px;
-    font-size: 0.875rem; font-weight: 500;
-    transition: border-color 0.2s, background 0.2s;
-  }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--card); border: 1px solid var(--border); color: var(--text); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-size: 0.875rem; font-weight: 500; transition: border-color 0.2s, background 0.2s; }
   .contact-link:hover { border-color: rgba(79,142,247,0.4); background: rgba(79,142,247,0.08); }
   .contact-link svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 2rem 6vw;
-    border-top: 1px solid var(--border);
-    color: var(--muted); font-size: 0.8rem;
-    background: var(--bg);
-  }
+  footer { text-align: center; padding: 2rem 6vw; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; background: var(--bg); }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-stats { flex-direction: column; gap: 1.5rem; }
     .edu-grid { grid-template-columns: 1fr; }
     .about-photo { display: none; }
   }
 
-  /* ── CURSOR DOT ── */
-  .cursor {
-    position: fixed; width: 6px; height: 6px;
-    background: var(--accent); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.15s;
-    transform: translate(-50%,-50%);
-  }
-  .cursor-ring {
-    position: fixed; width: 32px; height: 32px;
-    border: 1px solid rgba(79,142,247,0.4);
-    border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transition: transform 0.35s ease, width 0.3s, height 0.3s;
-    transform: translate(-50%,-50%);
-  }
-
-  /* scrollbar */
+  .cursor { position: fixed; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+  .cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(79,142,247,0.4); border-radius: 50%; pointer-events: none; z-index: 9998; transition: width 0.3s, height 0.3s, border-color 0.3s; transform: translate(-50%,-50%); }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: rgba(79,142,247,0.3); border-radius: 2px; }
+  [data-i18n] { transition: opacity 0.15s; }
+  .lang-fade { opacity: 0 !important; }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
-<!-- NAVIGATION -->
 <nav>
   <a href="#" class="nav-logo">AA<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="#about">Profil</a></li>
-    <li><a href="#experience">Expériences</a></li>
-    <li><a href="#skills">Compétences</a></li>
-    <li><a href="#education">Formation</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li><a href="#about" data-i18n="nav_about">Profil</a></li>
+    <li><a href="#experience" data-i18n="nav_exp">Expériences</a></li>
+    <li><a href="#skills" data-i18n="nav_skills">Compétences</a></li>
+    <li><a href="#education" data-i18n="nav_edu">Formation</a></li>
+    <li><a href="#contact" class="nav-cta" data-i18n="nav_contact">Contact</a></li>
   </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
-  <div class="hero-badge">Disponible pour de nouvelles opportunités</div>
-  <h1 class="hero-title">
-    Achraf<br>
-    <span class="line2">Ameur.</span>
-  </h1>
-  <p class="hero-sub">
-    Ingénieur Full-Stack spécialisé en Python, Django & React. Je conçois des solutions robustes, scalables, et taillées pour les environnements les plus exigeants.
-  </p>
+  <div class="hero-badge" data-i18n="hero_badge">Disponible pour de nouvelles opportunités</div>
+  <h1 class="hero-title">Achraf<br><span class="line2">Ameur.</span></h1>
+  <p class="hero-sub" data-i18n="hero_sub">Ingénieur Full-Stack spécialisé en Python, Django &amp; React. Je conçois des solutions robustes, scalables, et taillées pour les environnements les plus exigeants.</p>
   <div class="hero-actions">
     <a href="#contact" class="btn-primary">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Me contacter
+      <span data-i18n="hero_cta1">Me contacter</span>
     </a>
     <a href="#experience" class="btn-secondary">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-      Voir mon parcours
+      <span data-i18n="hero_cta2">Voir mon parcours</span>
     </a>
   </div>
   <div class="hero-stats">
-    <div>
-      <div class="stat-num">4+</div>
-      <div class="stat-label">Ans d'expérience</div>
-    </div>
-    <div>
-      <div class="stat-num">4</div>
-      <div class="stat-label">Entreprises</div>
-    </div>
-    <div>
-      <div class="stat-num">10+</div>
-      <div class="stat-label">Technologies maîtrisées</div>
-    </div>
-    <div>
-      <div class="stat-num">4</div>
-      <div class="stat-label">Langues</div>
-    </div>
+    <div><div class="stat-num">4+</div><div class="stat-label" data-i18n="stat1">Ans d'expérience</div></div>
+    <div><div class="stat-num">4</div><div class="stat-label" data-i18n="stat2">Entreprises</div></div>
+    <div><div class="stat-num">10+</div><div class="stat-label" data-i18n="stat3">Technologies maîtrisées</div></div>
+    <div><div class="stat-num">4</div><div class="stat-label" data-i18n="stat4">Langues</div></div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div>
-    <div class="section-tag">À propos</div>
-    <h2 class="section-title">Mon profil</h2>
-    <p class="section-desc">Passionné par l'ingénierie logicielle et les architectures modernes.</p>
+    <div class="section-tag" data-i18n="about_tag">À propos</div>
+    <h2 class="section-title" data-i18n="about_title">Mon profil</h2>
+    <p class="section-desc" data-i18n="about_desc">Passionné par l'ingénierie logicielle et les architectures modernes.</p>
   </div>
   <div class="about-grid">
     <div class="about-photo">
-      <div class="about-photo-frame">
-        <div class="avatar-big">AA</div>
-      </div>
+      <div class="about-photo-frame"><div class="avatar-big">AA</div></div>
     </div>
     <div class="about-text">
-      <h3>Ingénieur Études &amp; Développement</h3>
-      <p>Ingénieur logiciel spécialisé en développement Full-Stack avec une forte expertise en Python, Django et React. Mon expérience couvre la conception d'applications web complexes, le développement d'APIs performantes et la mise en place d'environnements conteneurisés.</p>
-      <p>Actuellement chez Société Générale à Paris, je conçois des solutions de monitoring critique pour des milliers d'équipements réseau VIP. Habitué aux environnements bancaires exigeants, je produis un code robuste, scalable et maintenable.</p>
+      <h3 data-i18n="about_role">Ingénieur Études &amp; Développement</h3>
+      <p data-i18n="about_p1">Ingénieur logiciel spécialisé en développement Full-Stack avec une forte expertise en Python, Django et React. Mon expérience couvre la conception d'applications web complexes, le développement d'APIs performantes et la mise en place d'environnements conteneurisés.</p>
+      <p data-i18n="about_p2">Actuellement chez Société Générale à Paris, je conçois des solutions de monitoring critique pour des milliers d'équipements réseau VIP. Habitué aux environnements bancaires exigeants, je produis un code robuste, scalable et maintenable.</p>
       <div class="lang-pills">
-        <span class="pill active">Français — Fluent</span>
-        <span class="pill active">Anglais — Fluent</span>
-        <span class="pill">Arabe — Natif</span>
-        <span class="pill">Espagnol — Intermédiaire</span>
+        <span class="pill active" data-i18n="lang1">Français — Fluent</span>
+        <span class="pill active" data-i18n="lang2">Anglais — Fluent</span>
+        <span class="pill" data-i18n="lang3">Arabe — Natif</span>
+        <span class="pill" data-i18n="lang4">Espagnol — Intermédiaire</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div>
-    <div class="section-tag">Carrière</div>
-    <h2 class="section-title">Expériences professionnelles</h2>
-    <p class="section-desc">Un parcours Full-Stack construit sur des projets réels et impactants.</p>
+    <div class="section-tag" data-i18n="exp_tag">Carrière</div>
+    <h2 class="section-title" data-i18n="exp_title">Expériences professionnelles</h2>
+    <p class="section-desc" data-i18n="exp_desc">Un parcours Full-Stack construit sur des projets réels et impactants.</p>
   </div>
   <div class="timeline">
     <div class="exp-item">
       <div class="exp-header">
         <span class="exp-company">Société Générale</span>
-        <span class="exp-date">Août 2025 — Présent</span>
+        <span class="exp-date" data-i18n="sg_date">Août 2025 — Présent</span>
       </div>
-      <div class="exp-role">Ingénieur Études & Développement · Paris, France</div>
+      <div class="exp-role" data-i18n="sg_role">Ingénieur Études &amp; Développement · Paris, France</div>
       <ul class="exp-tasks">
-        <li>Conception et développement de VIP-Report : monitoring temps réel de milliers d'équipements critiques sur 8 étages VIP</li>
-        <li>Intégration d'APIs externes (ThousandEyes, Catalyst Center, APIs internes SG) pour la récupération automatisée de données réseau</li>
-        <li>Génération automatique de tickets Unity via API pour l'alerting en temps réel</li>
-        <li>Développement de dashboards de monitoring avec VueJS/Nuxt3</li>
-        <li>Création d'un Design System et de composants réutilisables</li>
-        <li>Upgrade Python et intégration du module d'authentification SGConnect</li>
+        <li data-i18n="sg_t1">Conception et développement de VIP-Report : monitoring temps réel de milliers d'équipements critiques sur 8 étages VIP</li>
+        <li data-i18n="sg_t2">Intégration d'APIs externes (ThousandEyes, Catalyst Center, APIs internes SG) pour la récupération automatisée de données réseau</li>
+        <li data-i18n="sg_t3">Génération automatique de tickets Unity via API pour l'alerting en temps réel</li>
+        <li data-i18n="sg_t4">Développement de dashboards de monitoring avec VueJS/Nuxt3</li>
+        <li data-i18n="sg_t5">Création d'un Design System et de composants réutilisables</li>
+        <li data-i18n="sg_t6">Upgrade Python et intégration du module d'authentification SGConnect</li>
       </ul>
     </div>
     <div class="exp-item">
       <div class="exp-header">
         <span class="exp-company">APTEED</span>
-        <span class="exp-date">Sep 2023 — Juin 2025</span>
+        <span class="exp-date" data-i18n="apt_date">Sep 2023 — Juin 2025</span>
       </div>
-      <div class="exp-role">Développeur Web Full-Stack · Aubagne, France</div>
+      <div class="exp-role" data-i18n="apt_role">Développeur Web Full-Stack · Aubagne, France</div>
       <ul class="exp-tasks">
-        <li>Développement de l'application KALANKE et de l'ERP SYNA</li>
-        <li>Conception des interfaces avec ReactJS, APIs backend en Python/Django</li>
-        <li>Intégration d'APIs LLM pour enrichir les fonctionnalités produit</li>
-        <li>Déploiement de modèles IA pour l'optimisation des campagnes marketing</li>
-        <li>Développement d'APIs backend en PHP et intégration WordPress</li>
+        <li data-i18n="apt_t1">Développement de l'application KALANKE et de l'ERP SYNA</li>
+        <li data-i18n="apt_t2">Conception des interfaces avec ReactJS, APIs backend en Python/Django</li>
+        <li data-i18n="apt_t3">Intégration d'APIs LLM pour enrichir les fonctionnalités produit</li>
+        <li data-i18n="apt_t4">Déploiement de modèles IA pour l'optimisation des campagnes marketing</li>
+        <li data-i18n="apt_t5">Développement d'APIs backend en PHP et intégration WordPress</li>
       </ul>
     </div>
     <div class="exp-item">
       <div class="exp-header">
         <span class="exp-company">MVH Solutions EURL</span>
-        <span class="exp-date">Oct 2022 — Juil 2023</span>
+        <span class="exp-date" data-i18n="mvh_date">Oct 2022 — Juil 2023</span>
       </div>
-      <div class="exp-role">Développeur Web Full-Stack · Aix-en-Provence, France</div>
+      <div class="exp-role" data-i18n="mvh_role">Développeur Web Full-Stack · Aix-en-Provence, France</div>
       <ul class="exp-tasks">
-        <li>Développement des interfaces graphiques avec ReactJS</li>
-        <li>Application mobile React Native avec Expo</li>
-        <li>Développement d'APIs Python 3.12 / Django</li>
+        <li data-i18n="mvh_t1">Développement des interfaces graphiques avec ReactJS</li>
+        <li data-i18n="mvh_t2">Application mobile React Native avec Expo</li>
+        <li data-i18n="mvh_t3">Développement d'APIs Python 3.12 / Django</li>
       </ul>
     </div>
     <div class="exp-item">
       <div class="exp-header">
         <span class="exp-company">PROXYM-IT</span>
-        <span class="exp-date">Jan 2022 — Juin 2022</span>
+        <span class="exp-date" data-i18n="px_date">Jan 2022 — Juin 2022</span>
       </div>
-      <div class="exp-role">Développeur Web Full-Stack · Sousse, Tunisie</div>
+      <div class="exp-role" data-i18n="px_role">Développeur Web Full-Stack · Sousse, Tunisie</div>
       <ul class="exp-tasks">
-        <li>Solution de gestion des sinistres avec C# / ASP.NET (Onion Architecture)</li>
-        <li>Développement des interfaces utilisateurs avec Angular 10</li>
+        <li data-i18n="px_t1">Solution de gestion des sinistres avec C# / ASP.NET (Onion Architecture)</li>
+        <li data-i18n="px_t2">Développement des interfaces utilisateurs avec Angular 10</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <div>
-    <div class="section-tag">Expertise technique</div>
-    <h2 class="section-title">Compétences</h2>
-    <p class="section-desc">Un stack technique complet, du frontend au DevOps.</p>
+    <div class="section-tag" data-i18n="sk_tag">Expertise technique</div>
+    <h2 class="section-title" data-i18n="sk_title">Compétences</h2>
+    <p class="section-desc" data-i18n="sk_desc">Un stack technique complet, du frontend au DevOps.</p>
   </div>
   <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-card-icon">⚡</div>
-      <h4>Langages</h4>
-      <div class="skill-tags">
-        <span class="skill-tag">Python 3.12</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">TypeScript</span>
-        <span class="skill-tag">Java 11/17</span>
-        <span class="skill-tag">PHP 7.4</span>
-        <span class="skill-tag">C#</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-icon">🎨</div>
-      <h4>Frontend</h4>
-      <div class="skill-tags">
-        <span class="skill-tag">ReactJS</span>
-        <span class="skill-tag">VueJS / Nuxt3</span>
-        <span class="skill-tag">Angular</span>
-        <span class="skill-tag">TypeScript</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-icon">🔧</div>
-      <h4>Backend & Frameworks</h4>
-      <div class="skill-tags">
-        <span class="skill-tag">Django</span>
-        <span class="skill-tag">NodeJS</span>
-        <span class="skill-tag">NestJS</span>
-        <span class="skill-tag">SpringBoot</span>
-        <span class="skill-tag">Flask</span>
-        <span class="skill-tag">ASP.NET</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-icon">📱</div>
-      <h4>Mobile</h4>
-      <div class="skill-tags">
-        <span class="skill-tag">React Native</span>
-        <span class="skill-tag">Flutter</span>
-        <span class="skill-tag">Expo</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-icon">🗄️</div>
-      <h4>Bases de données</h4>
-      <div class="skill-tags">
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">MongoDB</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-icon">🚀</div>
-      <h4>DevOps & Outils</h4>
-      <div class="skill-tags">
-        <span class="skill-tag">Docker</span>
-        <span class="skill-tag">GitHub Actions</span>
-        <span class="skill-tag">GitLab CI</span>
-        <span class="skill-tag">Scrum</span>
-      </div>
-    </div>
+    <div class="skill-card"><div class="skill-card-icon">⚡</div><h4 data-i18n="sk_lang">Langages</h4><div class="skill-tags"><span class="skill-tag">Python 3.12</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Java 11/17</span><span class="skill-tag">PHP 7.4</span><span class="skill-tag">C#</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">🎨</div><h4 data-i18n="sk_front">Frontend</h4><div class="skill-tags"><span class="skill-tag">ReactJS</span><span class="skill-tag">VueJS / Nuxt3</span><span class="skill-tag">Angular</span><span class="skill-tag">TypeScript</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">🔧</div><h4 data-i18n="sk_back">Backend &amp; Frameworks</h4><div class="skill-tags"><span class="skill-tag">Django</span><span class="skill-tag">NodeJS</span><span class="skill-tag">NestJS</span><span class="skill-tag">SpringBoot</span><span class="skill-tag">Flask</span><span class="skill-tag">ASP.NET</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">📱</div><h4 data-i18n="sk_mobile">Mobile</h4><div class="skill-tags"><span class="skill-tag">React Native</span><span class="skill-tag">Flutter</span><span class="skill-tag">Expo</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">🗄️</div><h4 data-i18n="sk_db">Bases de données</h4><div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span></div></div>
+    <div class="skill-card"><div class="skill-card-icon">🚀</div><h4 data-i18n="sk_devops">DevOps &amp; Outils</h4><div class="skill-tags"><span class="skill-tag">Docker</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">GitLab CI</span><span class="skill-tag">Scrum</span></div></div>
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
   <div>
-    <div class="section-tag">Formation</div>
-    <h2 class="section-title">Parcours académique</h2>
-    <p class="section-desc">Une solide base théorique couplée à une forte expérience terrain.</p>
+    <div class="section-tag" data-i18n="edu_tag">Formation</div>
+    <h2 class="section-title" data-i18n="edu_title">Parcours académique</h2>
+    <p class="section-desc" data-i18n="edu_desc">Une solide base théorique couplée à une forte expérience terrain.</p>
   </div>
   <div class="edu-grid">
     <div class="edu-card">
-      <div class="edu-degree">Mastère Expert en développement web</div>
+      <div class="edu-degree" data-i18n="edu1_deg">Mastère Expert en développement web</div>
       <div class="edu-school">Aix Ynov Campus</div>
       <div class="edu-year">2022 — 2024</div>
     </div>
     <div class="edu-card">
-      <div class="edu-degree">Licence en Sciences Informatiques et Multimédia</div>
-      <div class="edu-school">Institut Supérieur d'Informatique et des Techniques de Communication — Hammam Sousse</div>
+      <div class="edu-degree" data-i18n="edu2_deg">Licence en Sciences Informatiques et Multimédia</div>
+      <div class="edu-school" data-i18n="edu2_school">Institut Supérieur d'Informatique et des Techniques de Communication — Hammam Sousse</div>
       <div class="edu-year">2019 — 2022</div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
-    <div class="section-tag">Contact</div>
-    <h2 class="section-title">Travaillons ensemble</h2>
-    <p class="section-desc">Disponible pour de nouvelles opportunités. N'hésitez pas à me contacter !</p>
+    <div class="section-tag" data-i18n="ct_tag">Contact</div>
+    <h2 class="section-title" data-i18n="ct_title">Travaillons ensemble</h2>
+    <p class="section-desc" data-i18n="ct_desc">Disponible pour de nouvelles opportunités. N'hésitez pas à me contacter !</p>
     <div class="contact-links">
       <a href="mailto:achref.ameur1925@gmail.com" class="contact-link">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -707,55 +320,136 @@
 </section>
 
 <footer>
-  <p>© 2026 Achraf Ameur — Ingénieur Full-Stack · Paris, France</p>
+  <p data-i18n="footer">© 2026 Achraf Ameur — Ingénieur Full-Stack · Paris, France</p>
 </footer>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mx=0, my=0, rx=0, ry=0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
+const i18n = {
+  fr: {
+    nav_about:'Profil', nav_exp:'Expériences', nav_skills:'Compétences', nav_edu:'Formation', nav_contact:'Contact',
+    hero_badge:'Disponible pour de nouvelles opportunités',
+    hero_sub:'Ingénieur Full-Stack spécialisé en Python, Django & React. Je conçois des solutions robustes, scalables, et taillées pour les environnements les plus exigeants.',
+    hero_cta1:'Me contacter', hero_cta2:'Voir mon parcours',
+    stat1:"Ans d'expérience", stat2:'Entreprises', stat3:'Technologies maîtrisées', stat4:'Langues',
+    about_tag:'À propos', about_title:'Mon profil', about_desc:"Passionné par l'ingénierie logicielle et les architectures modernes.",
+    about_role:'Ingénieur Études & Développement',
+    about_p1:"Ingénieur logiciel spécialisé en développement Full-Stack avec une forte expertise en Python, Django et React. Mon expérience couvre la conception d'applications web complexes, le développement d'APIs performantes et la mise en place d'environnements conteneurisés.",
+    about_p2:"Actuellement chez Société Générale à Paris, je conçois des solutions de monitoring critique pour des milliers d'équipements réseau VIP. Habitué aux environnements bancaires exigeants, je produis un code robuste, scalable et maintenable.",
+    lang1:'Français — Fluent', lang2:'Anglais — Fluent', lang3:'Arabe — Natif', lang4:'Espagnol — Intermédiaire',
+    exp_tag:'Carrière', exp_title:'Expériences professionnelles', exp_desc:'Un parcours Full-Stack construit sur des projets réels et impactants.',
+    sg_date:'Août 2025 — Présent', sg_role:'Ingénieur Études & Développement · Paris, France',
+    sg_t1:"Conception et développement de VIP-Report : monitoring temps réel de milliers d'équipements critiques sur 8 étages VIP",
+    sg_t2:"Intégration d'APIs externes (ThousandEyes, Catalyst Center, APIs internes SG) pour la récupération automatisée de données réseau",
+    sg_t3:"Génération automatique de tickets Unity via API pour l'alerting en temps réel",
+    sg_t4:'Développement de dashboards de monitoring avec VueJS/Nuxt3',
+    sg_t5:"Création d'un Design System et de composants réutilisables",
+    sg_t6:"Upgrade Python et intégration du module d'authentification SGConnect",
+    apt_date:'Sep 2023 — Juin 2025', apt_role:'Développeur Web Full-Stack · Aubagne, France',
+    apt_t1:"Développement de l'application KALANKE et de l'ERP SYNA",
+    apt_t2:'Conception des interfaces avec ReactJS, APIs backend en Python/Django',
+    apt_t3:"Intégration d'APIs LLM pour enrichir les fonctionnalités produit",
+    apt_t4:"Déploiement de modèles IA pour l'optimisation des campagnes marketing",
+    apt_t5:"Développement d'APIs backend en PHP et intégration WordPress",
+    mvh_date:'Oct 2022 — Juil 2023', mvh_role:'Développeur Web Full-Stack · Aix-en-Provence, France',
+    mvh_t1:'Développement des interfaces graphiques avec ReactJS',
+    mvh_t2:'Application mobile React Native avec Expo',
+    mvh_t3:"Développement d'APIs Python 3.12 / Django",
+    px_date:'Jan 2022 — Juin 2022', px_role:'Développeur Web Full-Stack · Sousse, Tunisie',
+    px_t1:'Solution de gestion des sinistres avec C# / ASP.NET (Onion Architecture)',
+    px_t2:'Développement des interfaces utilisateurs avec Angular 10',
+    sk_tag:'Expertise technique', sk_title:'Compétences', sk_desc:'Un stack technique complet, du frontend au DevOps.',
+    sk_lang:'Langages', sk_front:'Frontend', sk_back:'Backend & Frameworks', sk_mobile:'Mobile', sk_db:'Bases de données', sk_devops:'DevOps & Outils',
+    edu_tag:'Formation', edu_title:'Parcours académique', edu_desc:'Une solide base théorique couplée à une forte expérience terrain.',
+    edu1_deg:'Mastère Expert en développement web',
+    edu2_deg:'Licence en Sciences Informatiques et Multimédia',
+    edu2_school:"Institut Supérieur d'Informatique et des Techniques de Communication — Hammam Sousse",
+    ct_tag:'Contact', ct_title:'Travaillons ensemble', ct_desc:"Disponible pour de nouvelles opportunités. N'hésitez pas à me contacter !",
+    footer:'© 2026 Achraf Ameur — Ingénieur Full-Stack · Paris, France'
+  },
+  en: {
+    nav_about:'About', nav_exp:'Experience', nav_skills:'Skills', nav_edu:'Education', nav_contact:'Contact',
+    hero_badge:'Open to new opportunities',
+    hero_sub:'Full-Stack Engineer specializing in Python, Django & React. I build robust, scalable solutions tailored for the most demanding environments.',
+    hero_cta1:'Get in touch', hero_cta2:'View my career',
+    stat1:'Years of experience', stat2:'Companies', stat3:'Technologies mastered', stat4:'Languages',
+    about_tag:'About', about_title:'My profile', about_desc:'Passionate about software engineering and modern architectures.',
+    about_role:'Software Development Engineer',
+    about_p1:'Software engineer specializing in Full-Stack development with strong expertise in Python, Django and React. My experience covers complex web application design, high-performance API development, and containerized environment setup.',
+    about_p2:'Currently at Société Générale in Paris, I design critical monitoring solutions for thousands of VIP network devices. Experienced in demanding banking environments, I deliver robust, scalable and maintainable code.',
+    lang1:'French — Fluent', lang2:'English — Fluent', lang3:'Arabic — Native', lang4:'Spanish — Intermediate',
+    exp_tag:'Career', exp_title:'Professional Experience', exp_desc:'A Full-Stack journey built on real, high-impact projects.',
+    sg_date:'Aug 2025 — Present', sg_role:'Software Development Engineer · Paris, France',
+    sg_t1:'Design and full development of VIP-Report: real-time monitoring of thousands of critical devices across 8 VIP floors',
+    sg_t2:'Integration of external APIs (ThousandEyes, Catalyst Center, internal SG APIs) for automated network data retrieval',
+    sg_t3:'Automatic Unity ticket generation via API for real-time alerting',
+    sg_t4:'Development of real-time monitoring dashboards using VueJS/Nuxt3',
+    sg_t5:'Creation of a Design System and reusable components',
+    sg_t6:'Python version upgrade and integration of the SGConnect authentication module',
+    apt_date:'Sep 2023 — Jun 2025', apt_role:'Full-Stack Web Developer · Aubagne, France',
+    apt_t1:'Development of the KALANKE application and the SYNA ERP',
+    apt_t2:'UI design with ReactJS, backend APIs in Python/Django',
+    apt_t3:'Integration of LLM APIs to enrich product features',
+    apt_t4:'Deployment of AI models to improve marketing campaign performance',
+    apt_t5:'Backend API development in PHP and WordPress integration',
+    mvh_date:'Oct 2022 — Jul 2023', mvh_role:'Full-Stack Web Developer · Aix-en-Provence, France',
+    mvh_t1:'Frontend development with ReactJS',
+    mvh_t2:'Mobile application in React Native using Expo',
+    mvh_t3:'API development with Python 3.12 / Django',
+    px_date:'Jan 2022 — Jun 2022', px_role:'Full-Stack Web Developer · Sousse, Tunisia',
+    px_t1:'Claims management solution using C# / ASP.NET (Onion Architecture)',
+    px_t2:'Frontend development with Angular 10',
+    sk_tag:'Technical expertise', sk_title:'Skills', sk_desc:'A complete tech stack, from frontend to DevOps.',
+    sk_lang:'Languages', sk_front:'Frontend', sk_back:'Backend & Frameworks', sk_mobile:'Mobile', sk_db:'Databases', sk_devops:'DevOps & Tools',
+    edu_tag:'Education', edu_title:'Academic background', edu_desc:'A strong theoretical foundation paired with extensive hands-on experience.',
+    edu1_deg:"Master's Expert in Web Development",
+    edu2_deg:'Bachelor in Computer Science & Multimedia',
+    edu2_school:'Higher Institute of Computer Science and Communication Technologies — Hammam Sousse',
+    ct_tag:'Contact', ct_title:"Let's work together", ct_desc:"Available for new opportunities. Don't hesitate to reach out!",
+    footer:'© 2026 Achraf Ameur — Full-Stack Engineer · Paris, France'
   }
-  animateRing();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.width='48px'; ring.style.height='48px'; ring.style.borderColor='rgba(79,142,247,0.6)'; });
-    el.addEventListener('mouseleave', () => { ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(79,142,247,0.4)'; });
-  });
+};
 
-  // Intersection Observer for timeline items
-  const items = document.querySelectorAll('.exp-item');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-      }
+function setLang(lang) {
+  document.getElementById('btn-fr').classList.toggle('active', lang==='fr');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.documentElement.lang = lang;
+  const els = document.querySelectorAll('[data-i18n]');
+  els.forEach(el => el.classList.add('lang-fade'));
+  setTimeout(() => {
+    els.forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (i18n[lang][k] !== undefined) el.textContent = i18n[lang][k];
+      el.classList.remove('lang-fade');
     });
-  }, { threshold: 0.1 });
-  items.forEach(el => obs.observe(el));
+  }, 180);
+}
 
-  // Smooth active nav
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? '#f1f5f9' : '';
-    });
-  });
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+(function animRing(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px';ring.style.borderColor='rgba(79,142,247,0.6)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(79,142,247,0.4)';});
+});
+
+// Timeline animation
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*120); });
+},{threshold:0.1});
+document.querySelectorAll('.exp-item').forEach(el=>obs.observe(el));
+
+// Active nav
+window.addEventListener('scroll',()=>{
+  let cur='';
+  document.querySelectorAll('section[id]').forEach(s=>{ if(window.scrollY>=s.offsetTop-120) cur=s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a=>{ a.style.color=a.getAttribute('href')==='#'+cur?'#f1f5f9':''; });
+});
 </script>
 </body>
 </html>
